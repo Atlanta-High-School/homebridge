@@ -8,7 +8,7 @@
     "pin": "031-45-154"
   },
   
-  "description": "This is an example configuration file with one fake accessory and one fake platform. You can use this as a template for creating your own configuration file containing devices you actually own. Network binding: By default, Homebridge binds to all available network interfaces, making it accessible on your local network (NOT limited to localhost). To bind to specific interfaces, add 'bind' option to bridge config (e.g., \"bind\": [\"en0\", \"eth0\"] or \"bind\": \"192.168.1.100\").",
+  "description": "This is an example configuration file with one fake accessory and one fake platform. You can use this as a template for creating your own configuration file containing devices you actually own. Note: Homebridge binds to all network interfaces by default (NOT limited to localhost). See README for network configuration details.",
   "ports": {
     "start": 52100,
     "end": 52150,
