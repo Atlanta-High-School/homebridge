@@ -103,6 +103,42 @@ If the bridge does not have any accessories yet, you may receive a message sayin
 
 Cameras and most TV devices are exposed as separate accessories and each needs to be paired separately. See [this wiki article](https://github.com/homebridge/homebridge/wiki/Connecting-Homebridge-To-HomeKit#how-to-add-homebridge-cameras--tvs) for instructions.
 
+## Network Configuration
+
+**Homebridge is NOT limited to localhost!** By default, Homebridge binds to all available network interfaces, making it accessible on your local network. This is required for HomeKit devices to discover and communicate with Homebridge.
+
+### Network Binding Options
+
+You can control which network interfaces Homebridge binds to using the `bind` option in your `config.json`:
+
+```json
+{
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154",
+    "bind": ["en0", "eth0"]
+  }
+}
+```
+
+**Binding Examples:**
+
+- **Default (all interfaces)**: Omit the `bind` option to bind to all available network interfaces
+- **Specific interfaces**: `"bind": ["en0", "eth0"]` - Bind to specific network interface names
+- **Specific IP addresses**: `"bind": "192.168.1.100"` - Bind to a specific IP address
+- **IPv4 only**: `"bind": "0.0.0.0"` - Bind to all IPv4 interfaces
+- **IPv6 support**: `"bind": "::"` - Bind to all IPv6 interfaces (with dual-stack support)
+
+### Important Notes
+
+- **Local Network Only**: HomeKit protocol requires devices to be on the same local network. Homebridge cannot be accessed over the internet directly due to HomeKit security requirements.
+- **Router Configuration**: If you want to access Homebridge from different VLANs or subnets on your local network, you may need to configure mDNS/Bonjour forwarding on your router.
+- **Firewall**: Ensure your firewall allows traffic on the configured port (default: 51826) and mDNS (port 5353).
+
+For more advanced network configuration options, see the [Homebridge Wiki](https://github.com/homebridge/homebridge/wiki).
+
 ## Interacting with your Devices
 
 Once your device has been added to HomeKit, you should be able to tell Siri to control your devices. However, realize that Siri is a cloud service, and iOS may need some time to synchronize your device information with iCloud.
